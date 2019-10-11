@@ -31,11 +31,11 @@ class App extends Component {
     }
 
     console.log("New input" , newInputString);
-    this.setState({input: newInputString, charList: newState});
+    this.setState({input: newInputString, charList: newState, length: newInputString.length});
     
   }
   
-  onChangeHandler = (event, inputLength) => {
+  onChangeHandler = (event) => {
    // console.log(inputLength, this.state.length);
     let value = event.target.value;
     let charArray = value.split('');
@@ -47,7 +47,7 @@ class App extends Component {
 
     this.setState({
       input: value,
-      length: inputLength,
+      length: event.target.value.length,
       charList: cList
     });
     console.log(cList);
@@ -78,7 +78,7 @@ class App extends Component {
          <div className="App">
              <InputField 
              text={this.state.input}
-             changed={(event) => this.onChangeHandler(event, length)} 
+             changed={this.onChangeHandler} 
              inputLength={this.state.length}></InputField>
              <ValidationComponent textLength={this.state.length}></ValidationComponent>
              {charComponentList}
