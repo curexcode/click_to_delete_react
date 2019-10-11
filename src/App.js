@@ -15,15 +15,23 @@ class App extends Component {
 
   onCharClickHandler = (event, id) =>{
 
-    console.log(id);
+    console.log("id = ", id);
     let newState = [...this.state.charList];
     let charClickedIndex = newState.findIndex( charObj => charObj.id === id);
+
+    // Deleting the char from list(array) of char
     newState.splice(charClickedIndex, 1);
     
-    let newInput = this.state.input.split('').splice(charClickedIndex, 1);
+    //  Converting array of char to string
+    let newInputArray = this.state.input.split('');
+    newInputArray.splice(charClickedIndex, 1);
+    let newInputString = '';
+    if(newInputArray.length !== 0){
+       newInputString = newInputArray.reduce( (accumulator, char) => accumulator + char);
+    }
 
-    console.log(newInput);
-    this.setState({input: newInput.join(''), charList: newState});
+    console.log("New input" , newInputString);
+    this.setState({input: newInputString, charList: newState});
     
   }
   
